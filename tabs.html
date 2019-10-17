@@ -1,0 +1,129 @@
+ <html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Товары</title>
+		<style>
+			#tabs {
+			   width: 100%;
+			   max-width: 500px;
+			}
+			.tab-header {
+			   list-style: none;
+			   padding-left: 0;
+			   display: flex;
+			   align-items: center;
+			   justify-content: flex-start;
+			   margin: 0;
+			}
+			.tab-header-item {
+			   padding: 10px 20px;
+			   margin-right: 5px;
+			   cursor: pointer;
+			   border: 1px solid #ddd;
+			   border-bottom: none;
+			}
+			.tab-content{
+				width:500px;
+				height:245px;
+				list-style: none;
+				margin: 0;
+				padding:0;
+				border: 1px solid #ddd;
+			}
+			.tab-content-item{
+				width:60px;
+				margin-right: 5px;
+				display: inline-block;
+			}
+		</style>
+	</head>
+		<body>
+			<div id="tabs">
+			   <ul class="tab-header">
+			   </ul>
+			   <ul class="tab-content">
+			   </ul>
+			</div>
+		</body>
+		<script type="text/javascript">
+		var products = [
+				{productId:1, productName: 'Товар 1', categoryId:1},
+				{productId:2, productName: 'Товар 2', categoryId:2},
+				{productId:3, productName: 'Товар 3', categoryId:3},
+				{productId:4, productName: 'Товар 4', categoryId:4},
+				{productId:5, productName: 'Товар 5', categoryId:5},
+				{productId:6, productName: 'Товар 6', categoryId:1},
+				{productId:7, productName: 'Товар 7', categoryId:2},
+				{productId:8, productName: 'Товар 8', categoryId:3},
+				{productId:9, productName: 'Товар 9', categoryId:4},
+				{productId:10, productName: 'Товар 10', categoryId:5},
+				{productId:11, productName: 'Товар 11', categoryId:1},
+				{productId:12, productName: 'Товар 12', categoryId:2},
+				{productId:13, productName: 'Товар 13', categoryId:3},
+				{productId:14, productName: 'Товар 14', categoryId:4},
+				{productId:15, productName: 'Товар 15', categoryId:5},
+				{productId:16, productName: 'Товар 16', categoryId:1},
+				{productId:17, productName: 'Товар 17', categoryId:2},
+				{productId:18, productName: 'Товар 18', categoryId:3},
+				{productId:19, productName: 'Товар 19', categoryId:4},
+				{productId:20, productName: 'Товар 20', categoryId:5},
+				{productId:21, productName: 'Товар 21', categoryId:1},
+				{productId:22, productName: 'Товар 22', categoryId:2},
+				{productId:23, productName: 'Товар 23', categoryId:3},
+				{productId:24, productName: 'Товар 24', categoryId:4},
+				{productId:25, productName: 'Товар 25', categoryId:5}
+			];
+			var categories = [
+				{categoryId:1, categoryName: 'Футболки'},
+				{categoryId:2, categoryName: 'Майки'},
+				{categoryId:3, categoryName: 'Носки'},
+				{categoryId:4, categoryName: 'Джинсы'},
+				{categoryId:5, categoryName: 'Брюки'},
+			];
+		loadTabs();
+		function loadTabs()
+		{
+			var ulbody = document.getElementById('tabs').getElementsByTagName('ul')[0];
+			for(i=0;i<=categories.length;i++)
+			{
+				if (categories[i] == null)break;
+				var row = document.createElement("li");
+				row.innerHTML = categories[i].categoryName;
+				ulbody.appendChild(row);
+				row.classList.add("tab-header-item");
+				row.setAttribute('onclick', 'onClickTabs('+categories[i].categoryId+')');
+				
+			}
+			var ulbody1 = document.getElementById('tabs').getElementsByTagName('ul')[1];
+			for(i=0;i<=products.length;i++)
+			{
+				if (products[i] == null)break;
+				var row1 = document.createElement("li");
+				row1.innerHTML = '<img src= "http://rrstatic.retailrocket.net/test_task/tovar.jpg" style="width:60px;" alt='+products[i].productName+'/><span>'+products[i].productName+'</span>';
+				ulbody1.appendChild(row1);
+				row1.classList.add("tab-content-item");
+				row1.setAttribute('style', 'display: none;');
+				row1.setAttribute('id', 'lig['+products[i].productId+']');
+			}
+			
+		}
+		function onClickTabs(id)
+		{
+			for(var i=0;i<=products.length;i++)
+			{
+				if(products[i] == null)break;
+				k=i+1;
+				var lig=document.getElementById('lig['+k+']');
+				lig.setAttribute('style','display: none;');
+			}
+			for(var i=0;i<products.length;i++)
+			{
+				k=i+1;
+				var lig=document.getElementById('lig['+k+']');
+				if(products[i] == null)break;
+				if(products[i].categoryId==id)lig.setAttribute('style','display: inline-block;');
+			}
+		}			
+		</script>
+</html>
+
